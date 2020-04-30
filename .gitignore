@@ -1,5 +1,4 @@
 /node_modules
 /out
 /.next
-/game-master.json
 /public/service-worker.js

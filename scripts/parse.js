@@ -56,4 +56,4 @@ function getGameMaster() {
   }, { pokemons: {}, moves: {}, multipliers: null })
 }
 
-fs.writeFileSync("game-master.json", JSON.stringify(getGameMaster()))
+fs.writeFileSync("public/game-master.json", JSON.stringify(getGameMaster()))

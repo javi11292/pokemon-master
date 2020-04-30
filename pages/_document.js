@@ -33,9 +33,9 @@ export default class Document extends NextDocument {
       <Html lang="es">
         <Head>
           <meta name="theme-color" content="#000000" />
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/logo192.png" />
-          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href={`${process.env.homepage}/favicon.ico`} />
+          <link rel="apple-touch-icon" href={`${process.env.homepage}/logo192.png`} />
+          <link rel="manifest" href={`${process.env.homepage}/manifest.json`} />
           <link href="https://storage.googleapis.com" rel="preconnect" />
           <link href="https://fonts.googleapis.com" rel="preconnect" />
           <link href="https://fonts.gstatic.com" rel="preconnect" />
