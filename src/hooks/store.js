@@ -1,6 +1,13 @@
 import { getStore } from "eztore"
 
 export const useStore = getStore({
+  run: {
+    state: null,
+    reducer(state, value) {
+      return value
+    }
+  },
+  
   notifications: {
     state: [],
     reducer(state, { action, value }) {

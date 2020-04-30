@@ -12,9 +12,12 @@ import {
 } from "@material-ui/core"
 import Notifications from "components/Notifications"
 import { THEME } from "libraries/theme"
+import { useStore } from "hooks/store"
+import Parser from "libraries/parser.worker"
 import * as styled from "./styled"
 
 export default function Main({ children }) {
+  const setRun = useStore("run", false)
   const [update, setUpdate] = useState()
 
   function handleClose({ currentTarget }) {
@@ -25,6 +28,23 @@ export default function Main({ children }) {
       setUpdate()
     }
   }
+
+  useEffect(() => {
+    const parser = new Parser()
+
+    setRun(() => (...value) => new Promise(resolve => {
+      const id = Date.now()
+
+      function handleMessage({ data }) {
+        if (data.id !== id) return
+        parser.removeEventListener("message", handleMessage)
+        resolve(data.value)
+      }
+
+      parser.postMessage({ value, id })
+      parser.addEventListener("message", handleMessage)
+    }))
+  }, [setRun])
 
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side")

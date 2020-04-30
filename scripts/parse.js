@@ -3,7 +3,7 @@ const rawGameMaster = require("../raw-game-master")
 
 function getGameMaster() {
   return rawGameMaster.itemTemplate.reduce((acc, item) => {
-    const { playerLevel, move, combatMove, pokemon } = item
+    const { playerLevel, move, combatMove, pokemon, templateId } = item
 
     if (playerLevel) {
       acc.multipliers = playerLevel.cpMultiplier
@@ -42,9 +42,12 @@ function getGameMaster() {
       const { uniqueId: id, type1, type2, stats, quickMoves, cinematicMoves, eliteQuickMoves, eliteCinematicMoves } = pokemon
 
       acc.pokemons[id] = {
+        number: parseInt(templateId.match(/^V(\d+)/)[1], 10),
         type1,
         type2,
-        stats,
+        attack: stats.baseAttack,
+        defense: stats.baseDefense,
+        stamina: stats.baseStamina,
         quickMoves,
         cinematicMoves,
         eliteQuickMoves,
@@ -56,4 +59,4 @@ function getGameMaster() {
   }, { pokemons: {}, moves: {}, multipliers: null })
 }
 
-fs.writeFileSync("public/game-master.json", JSON.stringify(getGameMaster()))
+fs.writeFileSync("game-master.json", JSON.stringify(getGameMaster()))
