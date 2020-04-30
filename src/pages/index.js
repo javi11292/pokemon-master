@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react"
+import { useEffect, useState } from "react"
 import { Fade } from "@material-ui/core"
 import { useStore } from "hooks/store"
 import { FixedSizeList as List } from "react-window"
@@ -18,7 +18,7 @@ export default function Home() {
     if (element) setSize(element.clientHeight)
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setHeight(window.innerHeight)
   }, [])
 
