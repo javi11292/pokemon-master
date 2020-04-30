@@ -5,7 +5,7 @@ module.exports = withPWA({
     homepage: process.env.npm_package_homepage,
   },
   generateBuildId: async () => 'current',
-  assetPrefix: process.env.NODE_ENV === 'production' ? process.env.npm_package_homepage : "",
+  assetPrefix: process.env.NODE_ENV === 'production' ? process.env.npm_package_homepage : undefined,
   dontAutoRegisterSw: true,
   workboxOpts: {
     swDest: process.env.NEXT_EXPORT ? "service-worker.js" : `${__dirname}/public/service-worker.js`,

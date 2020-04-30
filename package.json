@@ -7,7 +7,7 @@
     "start": "next build && next start",
     "parse": "node scripts/parse",
     "build": "node scripts/build",
-    "deploy": "gh-pages -d out",
+    "deploy": "gh-pages -t -d out",
     "predeploy": "npm run build"
   },
   "dependencies": {
