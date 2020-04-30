@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Client</title>
+        <title>Pokemon Master</title>
       </Head>
 
       <Main>

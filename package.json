@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "start": "next build && next start"
+    "start": "next build && next start",
+    "export": "NEXT_EXPORT=true next build && NEXT_EXPORT=true next export",
+    "parse": "node scripts/parse"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.0",

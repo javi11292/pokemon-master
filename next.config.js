@@ -3,7 +3,7 @@ const withPWA = require("next-offline")
 module.exports = withPWA({
   dontAutoRegisterSw: true,
   workboxOpts: {
-    swDest: `${__dirname}/public/service-worker.js`,
+    swDest: process.env.NEXT_EXPORT ? "service-worker.js" : `${__dirname}/public/service-worker.js`,
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
