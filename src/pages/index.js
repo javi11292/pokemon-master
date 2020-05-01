@@ -32,7 +32,7 @@ export default function Home() {
       <styled.Row>
         <div>#</div>
         <div>Name</div>
-        <div>Score</div>
+        <div>TDO</div>
         <div>DPS</div>
       </styled.Row>
 
@@ -44,13 +44,13 @@ export default function Home() {
           itemCount={pokemons?.length || 0}
           itemSize={size || 50}>
           {({ index, style }) => {
-            const { number, name, score } = pokemons[index]
+            const { number, name, tdo, dps } = pokemons[index]
             return (
               <styled.Row style={size ? style : undefined} ref={index === 0 ? addRef : undefined}>
                 <div>{number}</div>
                 <div>{name}</div>
-                <div>{score}</div>
-                <div>-</div>
+                <div>{tdo}</div>
+                <div>{dps}</div>
               </styled.Row>
             )
           }}

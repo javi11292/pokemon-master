@@ -10,7 +10,7 @@ function getGameMaster() {
     }
 
     else if (move) {
-      const { movementId: id, pokemonType: type, power, durationMs: duration, energyDelta: energy } = move
+      const { movementId: id, pokemonType: type, power = 0, durationMs: duration, energyDelta: energy = -100 } = move
       const combat = acc.moves[id]?.combat
 
       const value = {
@@ -25,7 +25,7 @@ function getGameMaster() {
     }
 
     else if (combatMove) {
-      const { uniqueId: id, power, durationTurns: duration = 0.5, energyDelta: energy } = combatMove
+      const { uniqueId: id, power = 0, durationTurns: duration = 0.5, energyDelta: energy = -100 } = combatMove
       const value = acc.moves[id] || {}
 
       const combat = {
@@ -43,15 +43,14 @@ function getGameMaster() {
 
       acc.pokemons[id] = {
         number: parseInt(templateId.match(/^V(\d+)/)[1], 10),
-        type1,
-        type2,
+        types: [type1, type2],
         attack: stats.baseAttack,
         defense: stats.baseDefense,
         stamina: stats.baseStamina,
-        quickMoves,
-        cinematicMoves,
-        eliteQuickMoves,
-        eliteCinematicMoves,
+        fastMoves: quickMoves,
+        chargeMoves: cinematicMoves,
+        eliteFastMoves: eliteQuickMoves,
+        eliteChargeMoves: eliteCinematicMoves,
       }
     }
 
