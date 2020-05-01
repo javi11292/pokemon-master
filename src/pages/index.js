@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Fade } from "@material-ui/core"
 import { useStore } from "hooks/store"
-import { FixedSizeList as List } from "react-window"
 import * as styled from "./styled"
 
 function itemKey(index, data) {
@@ -38,7 +37,7 @@ export default function Home() {
       </styled.Row>
 
       <Fade in={!!pokemons}>
-        <List
+        <styled.List
           height={height}
           itemKey={itemKey}
           itemData={pokemons}
@@ -55,7 +54,7 @@ export default function Home() {
               </styled.Row>
             )
           }}
-        </List>
+        </styled.List>
       </Fade>
     </styled.Root >
   )

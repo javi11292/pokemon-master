@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Paper } from "@material-ui/core"
+import { FixedSizeList } from "react-window"
 
 export const Root = styled(Paper)`
   height: 100%;
@@ -22,7 +23,11 @@ export const Row = styled.div`
 
   > * {
     overflow: hidden;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-bottom: 1px solid grey;
   }
+`
+
+export const List = styled(FixedSizeList)`
+  overflow: overlay !important;
 `
