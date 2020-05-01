@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{"/Ecd":function(n,o,u){(window.__NEXT_P=window.__NEXT_P||[]).push(["/[pokemon]",function(){return u("y+WP")}])},"y+WP":function(n,o,u){"use strict";u.r(o),u.d(o,"default",(function(){return e}));var t=u("nOHt");function e(){var n=Object(t.useRouter)().query.pokemon;return void 0===n?"":n}}},[["/Ecd",0,2,1]]]);
