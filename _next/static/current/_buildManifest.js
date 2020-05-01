@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = (function(a){return {"/":[a],"/404":[a],"/index":[a]}}("static\u002Fchunks\u002F489edbe52997a911566d1fa4f2937b29d13192ee.93012c63e30fc2989686.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = (function(a){return {"/":[a],"/404":[a],"/index":[a]}}("static\u002Fchunks\u002F489edbe52997a911566d1fa4f2937b29d13192ee.8a4b68e0966a8e1f0c1e.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
