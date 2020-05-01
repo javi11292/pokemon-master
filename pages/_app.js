@@ -6,8 +6,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Pokemon Master</title>
-        <meta name="description" content="Pokemon GO TDO database" />
+        <title>Pokémon Master</title>
+        <meta name="description" content="Pokémon GO TDO database" />
       </Head>
 
       <Main>

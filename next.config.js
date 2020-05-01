@@ -18,7 +18,7 @@ module.exports = withWorkers(
         runtimeCaching: [
           {
             urlPattern: /^https?.*/,
-            handler: "NetworkFirst",
+            handler: "CacheFirst",
             options: {
               cacheName: "offlineCache",
               expiration: {
