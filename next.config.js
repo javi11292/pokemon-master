@@ -1,18 +1,19 @@
 const withPWA = require("next-offline")
 const withWorkers = require("@zeit/next-workers")
 
-const homepage = process.env.NODE_ENV === "production" ? process.env.npm_package_homepage : ""
+const basePath = process.env.NODE_ENV === "production" ? process.env.npm_package_basePath : ""
 
 module.exports = withWorkers(
   withPWA(
     {
       env: {
-        homepage,
+        basePath,
       },
       generateBuildId: async () => "current",
-      workerLoaderOptions: { publicPath: `${homepage}/_next/`, name: "static/[hash].worker.js" },
-      assetPrefix: homepage,
+      workerLoaderOptions: { publicPath: `${basePath}/_next/`, name: "static/[hash].worker.js" },
+      assetPrefix: basePath,
       dontAutoRegisterSw: true,
+      experimental: { basePath: basePath },
       workboxOpts: {
         swDest: process.env.NEXT_EXPORT ? "service-worker.js" : `${__dirname}/public/service-worker.js`,
         runtimeCaching: [

@@ -37,7 +37,7 @@ export default function Home() {
 
   function handleKey({ key }) {
     if (key === "Enter") {
-      Router.push(`/${search}`)
+      Router.push("/[pokemon]", `/${search}`)
     }
   }
 

@@ -53,7 +53,7 @@ export default function Main({ children }) {
 
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") return
-    navigator.serviceWorker.register(`${process.env.homepage}/service-worker.js`).then(registration => {
+    navigator.serviceWorker.register(`${process.env.basePath}/service-worker.js`).then(registration => {
       registration.onupdatefound = () => {
         const worker = registration.installing
         let hasUpdated = false
