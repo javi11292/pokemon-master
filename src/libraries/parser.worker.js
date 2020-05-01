@@ -5,6 +5,7 @@ self.addEventListener("message", async ({ data }) => {
   self.postMessage({ value: await functions[id](...args), id: data.id })
 })
 
+const BATTLE_TIME = 30
 const data = getComputedData()
 
 const functions = {
@@ -20,9 +21,9 @@ function round(value) {
   return Math.round(value * 10) / 10
 }
 
-function getDPS(fast, charge) {
+function getDPS(fast, charge, stamina) {
   if (!fast || !charge || !fast.energyDamage) return 0
-  const timeToCharge = -charge.energy / fast.energyDamage
+  const timeToCharge = -charge.energy / (fast.energyDamage + stamina / 2 / BATTLE_TIME)
   const totalTime = charge.duration / 1000 + timeToCharge
   return round((timeToCharge * fast.dps + charge.power) / totalTime)
 }
@@ -44,7 +45,7 @@ function getTDO({ types, attack, defense, stamina, fastMoves = [], chargeMoves =
 
   const bestFastMove = fastMoves.reduce(findBestMove, null)
   const bestChargeMove = chargeMoves.reduce(findBestMove, null)
-  const dps = getDPS(bestFastMove, bestChargeMove)
+  const dps = getDPS(bestFastMove, bestChargeMove, stamina)
 
   return { tdo: round(stats * dps / (2 * Math.pow(10, 5))), dps: round(dps * attack / 20) }
 }
