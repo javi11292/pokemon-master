@@ -29,5 +29,6 @@ export const Row = styled.div`
 `
 
 export const List = styled(FixedSizeList)`
-  overflow: overlay !important;
+  overflow-x: overlay !important;
+  overflow-y: hidden;
 `

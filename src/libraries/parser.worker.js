@@ -2,14 +2,17 @@ const { self } = global
 
 self.addEventListener("message", async ({ data }) => {
   const [id, ...args] = data.value
-  self.postMessage({ value: await functions[id](args), id: data.id })
+  self.postMessage({ value: await functions[id](...args), id: data.id })
 })
 
 const data = getComputedData()
 
 const functions = {
-  getPokemons() {
-    return Object.values(data.pokemons)
+  getPokemons({ orderBy, direction }) {
+    return Object.values(data.pokemons).sort((a, b) => {
+      if (typeof a[orderBy] === "string") return a[orderBy].localeCompare(b[orderBy]) * direction
+      return (a[orderBy] - b[orderBy]) * direction
+    })
   }
 }
 
@@ -19,13 +22,12 @@ function round(value) {
 
 function getDPS(fast, charge) {
   if (!fast || !charge || !fast.energyDamage) return 0
-  //console.log(fast, charge)
   const timeToCharge = -charge.energy / fast.energyDamage
   const totalTime = charge.duration / 1000 + timeToCharge
   return round((timeToCharge * fast.dps + charge.power) / totalTime)
 }
 
-function getTDO({ number, types, attack, defense, stamina, fastMoves = [], chargeMoves = [] }, moves) {
+function getTDO({ types, attack, defense, stamina, fastMoves = [], chargeMoves = [] }, moves) {
   const stats = attack * defense * stamina
 
   function findBestMove(acc, moveName) {
