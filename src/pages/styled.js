@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { Paper } from "@material-ui/core"
+import { Paper, InputBase } from "@material-ui/core"
 import { FixedSizeList } from "react-window"
 
-export const Root = styled(Paper)`
+export const Root = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -31,4 +31,25 @@ export const Row = styled.div`
 export const List = styled(FixedSizeList)`
   overflow-x: overlay !important;
   overflow-y: hidden;
+`
+
+export const InputContainer = styled(Paper)`
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid transparent;
+  transition: border-color 300ms;
+
+  :focus-within {
+    border-color: lightgrey;
+  }
+`
+
+export const Input = styled(InputBase)`
+  flex: 1;
+
+  .MuiInputBase-input {
+    padding: 0;
+  }
 `

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Router from "next/router"
 import { Fade, TableSortLabel } from "@material-ui/core"
 import { useStore } from "hooks/store"
 import * as styled from "./styled"
@@ -12,6 +13,7 @@ export default function Home() {
   const [pokemons, setPokemons] = useState()
   const [size, setSize] = useState()
   const [height, setHeight] = useState(0)
+  const [search, setSearch] = useState("")
   const [sort, setSort] = useState({ orderBy: "number", direction: 1 })
 
   function addRef(element) {
@@ -29,6 +31,16 @@ export default function Home() {
     }
   }
 
+  function handleChange({ currentTarget }) {
+    setSearch(currentTarget.value)
+  }
+
+  function handleKey({ key }) {
+    if (key === "Enter") {
+      Router.push(`/${search}`)
+    }
+  }
+
   useEffect(() => {
     setHeight(window.innerHeight)
   }, [])
@@ -43,6 +55,14 @@ export default function Home() {
 
   return (
     <styled.Root>
+      <styled.InputContainer>
+        <styled.Input
+          onKeyDown={handleKey}
+          onChange={handleChange}
+          value={search}
+          placeholder="Search pokémon" />
+      </styled.InputContainer>
+
       <styled.Row>
         <div>
           <TableSortLabel
