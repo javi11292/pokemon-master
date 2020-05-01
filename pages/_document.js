@@ -41,6 +41,7 @@ export default class Document extends NextDocument {
           <link href="https://fonts.gstatic.com" rel="preconnect" />
           <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="preload" as="style" />
           <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-4983254464826098" />
         </Head>
 
         <body style={{ overscrollBehavior: "none" }}>
