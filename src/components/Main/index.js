@@ -16,6 +16,12 @@ import { useStore } from "hooks/store"
 import Parser from "libraries/parser.worker"
 import * as styled from "./styled"
 
+function getId() {
+  return getId.id++
+}
+
+getId.id = 0
+
 export default function Main({ children }) {
   const setRun = useStore("run", false)
   const [update, setUpdate] = useState()
@@ -33,7 +39,7 @@ export default function Main({ children }) {
     const parser = new Parser()
 
     setRun(() => (...value) => new Promise(resolve => {
-      const id = Date.now()
+      const id = getId()
 
       function handleMessage({ data }) {
         if (data.id !== id) return

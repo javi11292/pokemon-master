@@ -1,6 +1,10 @@
 const fs = require("fs")
 const rawGameMaster = require("../raw-game-master")
 
+function capitalize(string) {
+  return string[0].toUpperCase() + string.slice(1).toLowerCase()
+}
+
 function getGameMaster() {
   return rawGameMaster.itemTemplate.reduce((acc, item) => {
     const { playerLevel, move, combatMove, pokemon, templateId } = item
@@ -39,9 +43,11 @@ function getGameMaster() {
     }
 
     else if (pokemon) {
-      const { uniqueId: id, type1, type2, stats, quickMoves, cinematicMoves, eliteQuickMoves, eliteCinematicMoves } = pokemon
+      const { uniqueId, type1, type2, stats, quickMoves, cinematicMoves, eliteQuickMoves, eliteCinematicMoves } = pokemon
+      const id = uniqueId.split("_").map(capitalize)
 
-      acc.pokemons[id] = {
+      acc.pokemons[id.join("_")] = {
+        prettyName: id.join(" "),
         number: parseInt(templateId.match(/^V(\d+)/)[1], 10),
         types: [type1, type2],
         attack: stats.baseAttack,

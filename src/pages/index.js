@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
 import Router from "next/router"
-import { Fade, TableSortLabel } from "@material-ui/core"
+import { Fade, TableSortLabel, IconButton } from "@material-ui/core"
+import MenuIcon from "@material-ui/icons/Menu"
 import { useStore } from "hooks/store"
 import * as styled from "./styled"
+
+const Search = dynamic(import("components/Search"))
 
 function itemKey(index, data) {
   return data[index].name
@@ -13,7 +17,7 @@ export default function Home() {
   const [pokemons, setPokemons] = useState()
   const [size, setSize] = useState()
   const [height, setHeight] = useState(0)
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState(false)
   const [sort, setSort] = useState({ orderBy: "number", direction: 1 })
 
   function addRef(element) {
@@ -31,14 +35,20 @@ export default function Home() {
     }
   }
 
-  function handleChange({ currentTarget }) {
-    setSearch(currentTarget.value)
+  function handleOpen() {
+    setSearch(true)
   }
 
-  function handleKey({ key }) {
-    if (key === "Enter") {
-      Router.push("/[pokemon]", `/${search}`)
-    }
+  function handleClose() {
+    setSearch(false)
+  }
+
+  function handleClick({ currentTarget }) {
+    showPokemon(currentTarget.dataset.id)
+  }
+
+  function showPokemon(pokemon) {
+    Router.push("/[pokemon]", `/${pokemon}`)
   }
 
   useEffect(() => {
@@ -46,22 +56,20 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (run) {
-      run("getPokemons", sort).then(setPokemons)
-    }
+    run("getPokemons", sort).then(setPokemons)
   }, [run, sort])
 
   const direction = sort.direction === 1 ? "asc" : "desc"
 
   return (
     <styled.Root>
-      <styled.InputContainer>
-        <styled.Input
-          onKeyDown={handleKey}
-          onChange={handleChange}
-          value={search}
-          placeholder="Search pokémon" />
-      </styled.InputContainer>
+      <styled.Input
+        onClick={handleOpen}>
+        <IconButton component="span">
+          <MenuIcon />
+        </IconButton>
+        <span>Search Pokémon</span>
+      </styled.Input>
 
       <styled.Row>
         <div>
@@ -106,11 +114,15 @@ export default function Home() {
           itemCount={pokemons?.length || 0}
           itemSize={size || 50}>
           {({ index, style }) => {
-            const { number, name, tdo, dps } = pokemons[index]
+            const { number, name, tdo, dps, prettyName } = pokemons[index]
             return (
-              <styled.Row style={size ? style : undefined} ref={index === 0 ? addRef : undefined}>
+              <styled.Row
+                data-id={name}
+                onClick={handleClick}
+                style={size ? style : undefined}
+                ref={index === 0 ? addRef : undefined}>
                 <div>{number}</div>
-                <div>{name}</div>
+                <div>{prettyName}</div>
                 <div>{dps}</div>
                 <div>{tdo}</div>
               </styled.Row>
@@ -118,6 +130,8 @@ export default function Home() {
           }}
         </styled.List>
       </Fade>
+
+      {search && <Search onClose={handleClose} showPokemon={showPokemon} />}
     </styled.Root >
   )
 }

@@ -14,7 +14,20 @@ const functions = {
       if (typeof a[orderBy] === "string") return a[orderBy].localeCompare(b[orderBy]) * direction
       return (a[orderBy] - b[orderBy]) * direction
     })
-  }
+  },
+
+  getPokemon(filter) {
+    const pokemons = Object.values(data.pokemons)
+    try {
+      const regExp = new RegExp(`^${filter}`, "i")
+      let filteredPokemons = []
+      for (let i = 0; i < pokemons.length; i++) {
+        if (regExp.test(pokemons[i].name)) filteredPokemons.push(pokemons[i])
+        if (filteredPokemons.length === 5) break
+      }
+      return filteredPokemons
+    } catch { }
+  },
 }
 
 function round(value) {
