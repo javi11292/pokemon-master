@@ -9,6 +9,10 @@ const BATTLE_TIME = 30
 const data = getComputedData()
 
 const functions = {
+  getPokemon(name){
+    return data.pokemons[name]
+  },
+
   getPokemons({ orderBy, direction }) {
     return Object.values(data.pokemons).sort((a, b) => {
       if (typeof a[orderBy] === "string") return a[orderBy].localeCompare(b[orderBy]) * direction
@@ -16,7 +20,7 @@ const functions = {
     })
   },
 
-  getPokemon(filter) {
+  getFilteredPokemons(filter) {
     const pokemons = Object.values(data.pokemons)
     try {
       const regExp = new RegExp(`^${filter}`, "i")

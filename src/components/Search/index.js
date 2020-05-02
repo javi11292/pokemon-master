@@ -39,7 +39,7 @@ export default function Search({ onClose, showPokemon }) {
 
   useEffect(() => {
     if (search) {
-      run("getPokemon", search).then(setPokemons)
+      run("getFilteredPokemons", search).then(setPokemons)
     } else {
       setPokemons()
     }

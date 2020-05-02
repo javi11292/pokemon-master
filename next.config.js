@@ -16,7 +16,6 @@ module.exports = withWorkers(
       experimental: { basePath: basePath },
       workboxOpts: {
         swDest: process.env.NEXT_EXPORT ? "service-worker.js" : `${__dirname}/public/service-worker.js`,
-        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: /^https?.*/,
