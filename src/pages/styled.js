@@ -28,6 +28,7 @@ export const List = styled(FixedSizeList)`
 
   ${Row} {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition: background-color 300ms;
 
     :hover {
