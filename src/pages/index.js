@@ -86,7 +86,7 @@ export default function Home() {
             data-direction="1"
             data-id="name"
             active={sort.orderBy === "name"}
-            direction={direction}>Name</TableSortLabel>
+            direction={direction}>Pokémon</TableSortLabel>
         </div>
         <div>
           <TableSortLabel
@@ -122,7 +122,12 @@ export default function Home() {
                 style={size ? style : undefined}
                 ref={index === 0 ? addRef : undefined}>
                 <div>{number}</div>
-                <div>{prettyName}</div>
+                <styled.Pokemon>
+                  <div>
+                    <img src={`${process.env.basePath}/pokemons/${name}.png`} alt={prettyName} />
+                  </div>
+                  {prettyName}
+                </styled.Pokemon>
                 <div>{dps}</div>
                 <div>{tdo}</div>
               </styled.Row>
