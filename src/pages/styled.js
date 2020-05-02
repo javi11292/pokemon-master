@@ -18,7 +18,7 @@ export const Row = styled.div`
   > * {
     overflow: hidden;
     padding: 0.75rem;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 `
 
