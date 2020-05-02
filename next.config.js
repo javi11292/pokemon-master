@@ -20,12 +20,6 @@ module.exports = withWorkers(
           {
             urlPattern: /^https?.*/,
             handler: "CacheFirst",
-            options: {
-              cacheName: "offlineCache",
-              expiration: {
-                maxEntries: 200
-              }
-            }
           }
         ]
       }
