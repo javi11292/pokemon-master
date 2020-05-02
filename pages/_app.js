@@ -1,5 +1,4 @@
 import Head from "next/head"
-import Error from "next/error"
 import Main from "components/Main"
 
 export default function App({ Component, pageProps }) {
@@ -11,10 +10,7 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       <Main>
-        {pageProps.statusCode
-          ? <Error statusCode={pageProps.statusCode} />
-          : <Component {...pageProps} />
-        }
+        <Component {...pageProps} />
       </Main>
     </>
   )
