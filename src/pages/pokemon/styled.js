@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components"
+import { Typography } from "@material-ui/core"
 
 const expand = keyframes`
   from {
@@ -8,12 +9,14 @@ const expand = keyframes`
 `
 
 function getBackground(value) {
-  const module = value % 50
+  const module = value % 50 / 50
 
   if (value < 50) {
-    return [200, 200 * module / 50, 0].join(",")
+    return [200, 200 * module, 0].join(",")
+  } else if (value < 100) {
+    return [200 - 200 * module, 200, 0].join(",")
   } else {
-    return [200 - 200 * module / 50, 200, 0].join(",")
+    return [0, 200, 0].join(",")
   }
 }
 
@@ -49,6 +52,7 @@ export const Bar = styled.div`
     font-size: 0.75rem;
     position: absolute;
     padding: 0.25rem;
+    font-weight: 500;
     top: 50%;
     right: 0.25rem;
     transform: translateY(-50%);
@@ -61,4 +65,8 @@ export const Bar = styled.div`
     width: ${props => props.value}%;
     animation: ${expand} 750ms;
   }
+`
+
+export const Name = styled(Typography)`
+  margin: 0.5rem;
 `
