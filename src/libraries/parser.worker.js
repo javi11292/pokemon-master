@@ -9,7 +9,11 @@ const BATTLE_TIME = 30
 const data = getComputedData()
 
 const functions = {
-  getPokemon(name){
+  getMaxStats() {
+    return data.maxStats
+  },
+
+  getPokemon(name) {
     return data.pokemons[name]
   },
 
@@ -81,7 +85,17 @@ function getComputedData() {
     return acc
   }, {})
 
+  const maxStats = {
+    attack: 0,
+    defense: 0,
+    stamina: 0,
+  }
+
   const pokemons = Object.entries(gameMaster.pokemons).reduce((acc, [name, pokemon]) => {
+    if (pokemon.attack > maxStats.attack) maxStats.attack = pokemon.attack
+    if (pokemon.defense > maxStats.defense) maxStats.defense = pokemon.defense
+    if (pokemon.stamina > maxStats.stamina) maxStats.stamina = pokemon.stamina
+
     acc[name] = {
       ...pokemon,
       ...getTDO(pokemon, moves),
@@ -91,7 +105,7 @@ function getComputedData() {
     return acc
   }, {})
 
-  return { pokemons, moves }
+  return { pokemons, moves, maxStats }
 }
 
 
