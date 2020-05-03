@@ -9,7 +9,6 @@ module.exports = withWorkers(
       env: {
         basePath,
       },
-      generateBuildId: async () => "current",
       workerLoaderOptions: { publicPath: `${basePath}/_next/`, name: "static/[hash].worker.js" },
       assetPrefix: basePath,
       dontAutoRegisterSw: true,

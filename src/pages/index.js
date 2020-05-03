@@ -124,7 +124,7 @@ export default function Home() {
                 <div>{number}</div>
                 <styled.Pokemon>
                   <div>
-                    <img src={`${process.env.basePath}/pokemons/${name}.png`} alt={prettyName} />
+                    <img src={`${process.env.basePath}/pokemons/${name}.png`} alt="" />
                   </div>
                   {prettyName}
                 </styled.Pokemon>
