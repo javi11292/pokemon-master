@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
-import { Fade } from "@material-ui/core"
+import { Fade, IconButton } from "@material-ui/core"
+import BackIcon from "@material-ui/icons/ArrowBack"
 import { useStore } from "hooks/store"
 import * as styled from "./styled"
 
@@ -16,6 +17,10 @@ export default function Pokemon() {
     setShowVideo(true)
   }
 
+  function handleBack() {
+    router.back()
+  }
+
   useEffect(() => {
     run("getMaxStats").then(setMaxStats)
     run("getPokemon", pokemonName).then(setPokemon)
@@ -23,6 +28,13 @@ export default function Pokemon() {
 
   return pokemon ? (
     <>
+      <styled.Name variant="h4">
+        <IconButton onClick={handleBack}>
+          <BackIcon />
+        </IconButton>
+        #{pokemon.number} {pokemon.prettyName}
+      </styled.Name>
+
       <styled.VideoContainer>
         <Fade in={showVideo}>
           <video onLoadedData={handleLoad} autoPlay loop muted playsInline src={`${process.env.basePath}/pokemons/${pokemon.name}.mp4`} />
@@ -43,8 +55,6 @@ export default function Pokemon() {
           </styled.Bar>
         </styled.Stats>
       </styled.VideoContainer>
-
-      <styled.Name variant="h4">#{pokemon.number} {pokemon.prettyName}</styled.Name>
     </>
   ) : null
 }
